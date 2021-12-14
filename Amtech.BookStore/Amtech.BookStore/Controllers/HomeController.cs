@@ -8,9 +8,13 @@ namespace Amtech.BookStore.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        public ViewResult Index()
         {
-            return "Welcome From Home";
+            return View();
+        }
+        public ViewResult AboutUs()
+        {
+            return View("../../UI/MyUI");
         }
     }
 }

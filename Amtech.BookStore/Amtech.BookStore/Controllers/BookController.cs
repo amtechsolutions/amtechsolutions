@@ -15,9 +15,9 @@ namespace Amtech.BookStore.Controllers
         {
             _book = new BookRepository();
         }
-        public List<Book> GetBooks()
+        public ViewResult GetBooks()
         {
-            return _book.GetAllBooks();
+            return View();
         }
         public Book GetBook(int id)
         {
