@@ -9,10 +9,19 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link rel="stylesheet" href="~/css/Site.css" />
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
 </head>
-<body>
-    <h1>Welcome to Book Application</h1>
-    <h2>Today's Date: @DateTime.Now.Date</h2>
-    <h3>@(7+8)</h3>
+<body class="container">
+   <img  src="~/Images/AmtechLogo.png" class="logo" alt="logo" />
+   @*<img src="~/StaticContents/planet.png" alt="planet"/>*@
+    <button class="btn btn bg-success">Click Me</button>
 </body>
+<script src="~/lib/jquery/jquery.js"></script>
+
 </html>
+<script>
+    $(document).ready(function () {
+        alert('Hi');
+    });
+</script>
