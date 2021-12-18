@@ -14,7 +14,12 @@ namespace Amtech.BookStore.Controllers
         }
         public ViewResult AboutUs()
         {
-            return View("../../UI/MyUI");
+            // return View("../../UI/MyUI");
+            return View();
+        }
+        public ViewResult ContactUs()
+        {
+            return View();
         }
     }
 }

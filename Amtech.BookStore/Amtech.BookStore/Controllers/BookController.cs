@@ -17,11 +17,13 @@ namespace Amtech.BookStore.Controllers
         }
         public ViewResult GetBooks()
         {
-            return View();
+            var books = _book.GetAllBooks();
+            return View(books);
         }
-        public Book GetBook(int id)
+        public ViewResult GetBook(int id)
         {
-            return _book.GetBookByid(id);
+            var bookModel= _book.GetBookByid(id);
+            return View(bookModel);
         }
         public List<Book> SearchBooks(string author, String bookName)
         {
