@@ -1,6 +1,14 @@
 ﻿@using Amtech.BookStore.Models
 @model IEnumerable<Book>
 
+@{ 
+    var parameters = new Dictionary<string, string>()
+    {
+        {"Name","WebGentle" },
+        {"Type","WebApp" },
+        {"Licence","Free" }
+    };
+}
 
 <div class="container">
     <h3 class="display-4">All Books</h3>
@@ -19,7 +27,8 @@
                         <p class="card-text">@book.description</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="/Book/GetBook/@book.Id" class="btn btn-sm btn-outline-secondary"> View Details</a>
+                                <a asp-controller="Book" asp-action="GetBook" asp-route-id="@book.Id"
+                                class="btn btn-sm btn-outline-secondary"> View Details</a>
                             </div>
                             <small class="text-muted">@book.author</small>
                         </div>

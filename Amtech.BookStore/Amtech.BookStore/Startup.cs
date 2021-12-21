@@ -45,7 +45,11 @@ namespace Amtech.BookStore
                 //{
                 //    await context.Response.WriteAsync("Hello World!");
                 //});
-                endpoints.MapDefaultControllerRoute();
+                //endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute(
+                    name: "Default",
+                    pattern: "BookApp/{controller=Home}/{action=Index}/{id?}"
+                    );
             });
         }
     }

@@ -28,16 +28,16 @@
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/AboutUs">About Us</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="aboutus">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/contactus">Contact Us</a>
+                            <a class="nav-link text-dark"asp-controller="Home" asp-action="contactus">Contact Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Book/GetBooks">All Books</a>
+                            <a class="nav-link text-dark" asp-controller="Book" asp-action="GetBooks">All Books</a>
                         </li>
                     </ul>
                 </div>

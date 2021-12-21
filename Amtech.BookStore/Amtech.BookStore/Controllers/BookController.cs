@@ -11,8 +11,10 @@ namespace Amtech.BookStore.Controllers
     public class BookController:Controller
     {
         private readonly BookRepository _book = null;
-        public BookController()
+      
+    public BookController()
         {
+          
             _book = new BookRepository();
         }
         public ViewResult GetBooks()
