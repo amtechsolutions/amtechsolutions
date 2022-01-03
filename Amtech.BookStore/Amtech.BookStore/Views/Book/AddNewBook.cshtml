@@ -1,0 +1,48 @@
+﻿@model BookModel
+@{
+    ViewData["Title"] = "AddNewBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h3 class="display-4">AddNewBook</h3>
+    <form method="post" class="m-0">
+        @*<div class="form-group">
+            <label asp-for="Name"></label>
+            <input class="form-control" asp-for="Name" />
+        </div>*@
+        <div class="row py-3">
+            <div class="col-1">
+                <label asp-for="Name" ></label>
+            </div>
+            <div class="col-5" >
+                <input  asp-for="Name" class="form-control" />
+            </div>
+            <div class="col-1"> 
+                <label asp-for="author" ></label>
+            </div>
+            <div class="col-5">
+                <input class="form-control" asp-for="author" />
+            </div>
+        </div>
+        <div class="row pt-5">
+            <div class="col-1">
+                <label asp-for="description"></label>
+            </div>
+            <div class="col-11">
+                <textarea class="form-control" asp-for="description"></textarea>
+            </div>
+        </div>
+        <div class="row pt-5">
+            <div class="col-4">
+                <label asp-for="TotalPages"></label>
+            </div>
+            <div class="col-4">
+                <input asp-for="TotalPages" class="form-control" />
+            </div>
+            <div class="col-3 offset-1">
+                <button type="submit" class="btn btn-primary">Save new book</button>
+            </div>
+        </div>
+    </form>
+</div>

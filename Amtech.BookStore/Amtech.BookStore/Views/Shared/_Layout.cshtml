@@ -3,16 +3,29 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Book Store Application</title>
+    <title> ViewData["Title"] | Book Store Application</title>
     <link rel="stylesheet" href="~/css/Site.css" />
-    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />*@
+    <environment include="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/9.4.1/css/bootstrap.min.css" 
+              integrity="" 
+              crossorigin="anonymous"
+              asp-fallback-href="~/lib/twitter-bootstrap/css/bootstrap.css"
+              asp-fallback-test-class="sr-only"
+              asp-fallback-test-property="position"
+              asp-fallback-test-value="absolute"
+              >
+    </environment>
+    <environment exclude="Development">
+        <link href="~/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    </environment>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggler navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" href="/">
-                    <img src="~/Images/AmtechLogo.png" width="35" height="35" />
+                    <img src="~/Images/AmtechLogo.png" asp-append-version="true" width="35" height="35" />
                     Book Store
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse"
@@ -34,10 +47,13 @@
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="aboutus">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark"asp-controller="Home" asp-action="contactus">Contact Us</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="contactus">Contact Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Book" asp-action="GetBooks">All Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Book" asp-action="AddNewBook">Add new Book</a>
                         </li>
                     </ul>
                 </div>

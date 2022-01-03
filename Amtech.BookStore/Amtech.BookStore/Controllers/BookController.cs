@@ -27,9 +27,18 @@ namespace Amtech.BookStore.Controllers
             var bookModel= _book.GetBookByid(id);
             return View(bookModel);
         }
-        public List<Book> SearchBooks(string author, String bookName)
+        public List<BookModel> SearchBooks(string author, String bookName)
         {
             return _book.SearchBooks( author, bookName);
+        }
+        public ViewResult AddNewBook()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ViewResult AddNewBook(BookModel bookModel)
+        {
+            return View();
         }
     }
 }
