@@ -1,4 +1,5 @@
-﻿using Amtech.BookStore.Models;
+﻿using Amtech.BookStore.Data;
+using Amtech.BookStore.Models;
 using Amtech.BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,33 +13,45 @@ namespace Amtech.BookStore.Controllers
     {
         private readonly BookRepository _book = null;
       
-    public BookController()
+    public BookController(BookRepository book)
         {
           
-            _book = new BookRepository();
+            _book = book;
         }
-        public ViewResult GetBooks()
+        public async Task<ViewResult> GetBooks()
         {
-            var books = _book.GetAllBooks();
+            var books = await _book.GetAllBooks();
             return View(books);
         }
-        public ViewResult GetBook(int id)
+        public async Task<ViewResult> GetBook(int id)
         {
-            var bookModel= _book.GetBookByid(id);
+            var bookModel= await _book.GetBookByid(id);
             return View(bookModel);
         }
         public List<BookModel> SearchBooks(string author, String bookName)
         {
             return _book.SearchBooks( author, bookName);
         }
-        public ViewResult AddNewBook()
+        public ViewResult AddNewBook(int bookId, bool isSaved)
         {
+            ViewBag.BookId = bookId;
+            ViewBag.IsSaved = isSaved;
             return View();
         }
         [HttpPost]
-        public ViewResult AddNewBook(BookModel bookModel)
+        public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                var id = await _book.AddNewBook(bookModel);
+                if (id > 0)
+                {
+                    return RedirectToAction(nameof(AddNewBook), new { bookId = id, isSaved = true });
+                }
+            }
+            ViewBag.IsSaved = false;
+            ViewBag.BookId = 0;
+             return View();
         }
     }
 }

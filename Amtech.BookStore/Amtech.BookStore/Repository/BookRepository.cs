@@ -1,20 +1,65 @@
-﻿using Amtech.BookStore.Models;
+﻿using Amtech.BookStore.Data;
+using Amtech.BookStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
 namespace Amtech.BookStore.Repository
 {
     public class BookRepository
     {
-        public List<BookModel> GetAllBooks()
+        private readonly BookStoreDbContext _bookStoreDbContext;
+
+        public BookRepository(BookStoreDbContext bookStoreDbContext)
         {
-            return GetBooksData();
+            _bookStoreDbContext = bookStoreDbContext;
         }
-        public BookModel GetBookByid(int id)
+        public async Task<int> AddNewBook(BookModel bookModel)
         {
-            return GetBooksData().Where(a => a.Id == id).FirstOrDefault();
+            var newBook = new Book()
+            {
+                author = bookModel.author,
+                description = bookModel.description,
+                Name = bookModel.Name,
+                TotalPages = bookModel.TotalPages ?? 0,
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow,
+                Language = bookModel.Language == null ? "English" : bookModel.Language
+            };
+
+            await _bookStoreDbContext.Book.AddAsync(newBook);
+            await _bookStoreDbContext.SaveChangesAsync();
+            return newBook.Id;
+        }
+        public async Task<List<BookModel>> GetAllBooks()
+        {
+           var booksList= await _bookStoreDbContext.Book.ToListAsync();
+           return booksList.Select(a => new BookModel
+            {
+                Id = a.Id,
+                Name = a.Name,
+                description = a.description,
+                TotalPages = a.TotalPages,
+                author = a.author,
+                Category = a.Category,
+            }).ToList();
+            //return GetBooksData();
+        }
+        public async  Task<BookModel> GetBookByid(int id)
+        {
+            var book = await _bookStoreDbContext.Book.FindAsync(id);
+            return new BookModel
+            {
+                Id = book.Id,
+                Name = book.Name,
+                description = book.description,
+                TotalPages = book.TotalPages,
+                author = book.author,
+                Category = book.Category,
+            };
+            //return _bookStoreDbContext.Book.Where(a => a.Id == id).FirstOrDefaultAsync();
+            //return GetBooksData().Where(a => a.Id == id).FirstOrDefault();
         }
         public List<BookModel> SearchBooks(string author,string name )
         {
