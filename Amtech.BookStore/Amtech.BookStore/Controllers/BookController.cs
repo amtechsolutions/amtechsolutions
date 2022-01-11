@@ -2,6 +2,7 @@
 using Amtech.BookStore.Models;
 using Amtech.BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +35,11 @@ namespace Amtech.BookStore.Controllers
         }
         public ViewResult AddNewBook(int bookId, bool isSaved)
         {
+            var book = new BookModel() { Language = "Hindi" };
+            ViewBag.Language = new SelectList( new List<string>() { "English", "Marathi", "Hindi" });
             ViewBag.BookId = bookId;
             ViewBag.IsSaved = isSaved;
-            return View();
+            return View(book);
         }
         [HttpPost]
         public async Task<IActionResult> AddNewBook(BookModel bookModel)
@@ -51,7 +54,8 @@ namespace Amtech.BookStore.Controllers
             }
             ViewBag.IsSaved = false;
             ViewBag.BookId = 0;
-             return View();
+            ViewBag.Language = new SelectList(new List<string>() { "English", "Marathi", "Hindi" });
+            return View();
         }
     }
 }

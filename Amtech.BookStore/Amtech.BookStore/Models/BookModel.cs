@@ -20,6 +20,7 @@ namespace Amtech.BookStore.Models
         [Required(ErrorMessage ="Please Enter Book Pages")]
         [Display(Name ="Total Pages")]
         public short? TotalPages { get; set; }
+        [Required]
         public string Language { get; set; }
     }
 }
